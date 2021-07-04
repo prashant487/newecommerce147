@@ -9,7 +9,7 @@
         <meta content="eCommerce HTML Template Free Download" name="description">
 
         <!-- Favicon -->
-        <link href="{% static 'img/favicon.ico' %} rel="icon">
+        <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
@@ -53,29 +53,25 @@
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="product-list.html" class="nav-item nav-link">Products</a>
-                            <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
-                            <a href="cart.html" class="nav-item nav-link">Cart</a>
-                            <a href="checkout.html" class="nav-item nav-link">Checkout</a>
-                            <a href="my-account.html" class="nav-item nav-link">My Account</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
-                                <div class="dropdown-menu">
-                                    <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                                    <a href="login.html" class="dropdown-item">Login & Register</a>
-                                    <a href="contact.html" class="dropdown-item">Contact Us</a>
-                                </div>
-                            </div>
+                            <a href="/" class="nav-item nav-link active">Home</a>
                         </div>
                         <div class="navbar-nav ml-auto">
+                            {% if user.is_authenticated %}
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.username}}</a>
+                                <div class="dropdown-menu">
+                                    <a href="/accounts/logout" class="dropdown-item">Logout</a>
+                                </div>
+                            </div>
+                            {% else %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                                 <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">Login</a>
-                                    <a href="#" class="dropdown-item">Register</a>
+                                    <a href="signin" class="dropdown-item">Login</a>
+                                    <a href="signup" class="dropdown-item">Register</a>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </nav>
@@ -95,10 +91,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <form method = "GET" action = "{% url 'home:search' %}">
                         <div class="search">
-                            <input type="text" placeholder="Search">
+                            <input name = "query" type="text" placeholder="Search">
                             <button><i class="fa fa-search"></i></button>
                         </div>
+                        </form>
                     </div>
                     <div class="col-md-3">
                         <div class="user">
@@ -106,7 +104,7 @@
                                 <i class="fa fa-heart"></i>
                                 <span>(0)</span>
                             </a>
-                            <a href="cart.html" class="btn cart">
+                            <a href="mycart" class="btn cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>(0)</span>
                             </a>
@@ -231,7 +229,11 @@
         <script src="{% static 'js/main.js' %}"></script>
     </body>
 </html>
-<-- bottom Bar End -->   >
+<-- bottom Bar End -->
+
+
+
+
 
 
 

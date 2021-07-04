@@ -11,7 +11,7 @@
                             <ul class="navbar-nav">
                                 {% for cat in categories %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-{{cat.categories}}"></i>{{cat.name}}</a>
+                                    <a class="nav-link" href="{{cat.get_category_url}}"><i class="fa fa-{{cat.categories}}"></i>{{cat.name}}</a>
                                 </li>
                                 {% endfor %}
                             </ul>
@@ -60,7 +60,7 @@
             <div class="container-fluid">
                 <div class="brand-slider">
                     {% for brand in brands %}
-                    <div class="brand-item"><img src="{{brand.image}}" alt=""></div>
+                    <div class="brand-item"><a href="{{brand.get_brand_url}}"><img src="{{brand.image}}" alt=""></a></div>
                     {% endfor %}
                 </div>
             </div>
@@ -217,7 +217,7 @@
                                     <img src="{{hot.image}}" alt="Product Image">
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{hot.get_cart_url}}"><i class="fa fa-cart-plus"></i></a>
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </div>
@@ -228,7 +228,7 @@
                                 {% else %}
                                 <h3><span>RS</span>{{hot.price}}</h3>
                                 {% endif %}
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                <a class="btn" href="{{hot.get_cart_url}}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -267,7 +267,7 @@
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
-                                <a href="#">{{new.title}}</a>
+                                <a href="{{new.get_url}}">{{new.title}}</a>
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -281,7 +281,7 @@
                                     <img src="{{new.image}}" alt="Product Image">
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{new.get_cart_url}}"><i class="fa fa-cart-plus"></i></a>
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </div>
@@ -292,7 +292,7 @@
                                 {% else %}
                                 <h3><span>RS</span>{{new.price}}</h3>
                                 {% endif %}
-                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                <a class="btn" href="{{new.get_cart_url}}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -375,6 +375,17 @@
         <!-- Review End -->        
         
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

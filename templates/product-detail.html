@@ -312,7 +312,7 @@
                             <h2 class="title">Our Brands</h2>
                             <ul>
                                 {% for brand in brands %}
-                                <li><a href="#">{{ brand.name }} </a><span></span></li>
+                                <li><a href="{{brand.get_brand_url}}">{{ brand.name }} </a><span></span></li>
                                 {% endfor %}
 
                             </ul>
@@ -357,6 +357,47 @@
         <!-- Brand End -->
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
