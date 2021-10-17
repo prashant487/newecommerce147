@@ -12,7 +12,7 @@ from django.urls import reverse
 class Categorie(models.Model):
     name = models.CharField(max_length=200)
     slug = models.CharField(max_length=200, unique=True)
-    image = models.CharField(max_length=500, blank=True)
+    image = models.ImageField(upload_to="media")
 
     def get_category_url(self):
         return reverse("home:category", kwargs={'slug': self.slug})
@@ -23,7 +23,7 @@ class Categorie(models.Model):
 
 class Slider(models.Model):
     name = models.CharField(max_length=300)
-    image = models.TextField()
+    image = models.ImageField(upload_to='media')
     description = models.TextField()
     url = models.TextField(blank=True)
 
@@ -34,7 +34,7 @@ class Slider(models.Model):
 class Ad(models.Model):
     name = models.CharField(max_length=300)
     rank = models.IntegerField(unique=True)
-    image = models.TextField()
+    image = models.ImageField(upload_to='media')
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -43,7 +43,7 @@ class Ad(models.Model):
 
 class Brand(models.Model):
     name = models.CharField(max_length=300)
-    image = models.TextField()
+    image = models.ImageField(upload_to='media')
     rank = models.IntegerField()
 
     def get_brand_url(self):
@@ -63,12 +63,12 @@ class Item(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     status = models.CharField(max_length=100, choices=STATUS)
     label = models.CharField(max_length=100, choices=LABEL, blank=True)
-    image = models.TextField(blank=True)
-    image2 = models.TextField(blank=True)
-    image3 = models.TextField(blank=True)
-    image4 = models.TextField(blank=True)
-    image5 = models.TextField(blank=True)
-    image6 = models.TextField(blank=True)
+    image = models.ImageField(upload_to='media')
+    image2 = models.ImageField(upload_to='media')
+    image3 = models.ImageField(upload_to='media')
+    image4 = models.ImageField(upload_to='media')
+    image5 = models.ImageField(upload_to='media')
+    image6 = models.ImageField(upload_to='media')
 
     def __str__(self):
         return self.title
@@ -119,11 +119,6 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-
-
 
 
 

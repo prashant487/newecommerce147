@@ -2,6 +2,7 @@ from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .models import *
+from django.core.mail import EmailMultiAlternatives
 # Create your views here.
 
 from django.views.generic.base import View
@@ -182,6 +183,136 @@ def grand_total(request, slug):
     for citem in Cart.objects.filter(user=request.user.username).total:
         subtotal = subtotal + citem
     return redirect('home:mycart')
+
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+
+        data = Contact.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message
+        )
+        data.save()
+        messages.success(request, 'Message is submitted.')
+        html_content = f"<p> The customer having name {name} , mail address {email} and subject (subject) has some , message and the message is {message} "
+        msg = EmailMultiAlternatives(subject, message, 'kushwahaprashant165@gmail.com',
+                                     ['kushwahaprashant165@gmail.com'])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+    return render(request, 'contact.html')
+
+
+
+
+from rest_framework import viewsets
+from .serializers import *
+
+
+class ItemViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+
+
+from django.views.generic import View, DetailView
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, generics
+from rest_framework.filters import OrderingFilter, SearchFilter
+
+
+class ItemFilterListView(generics.ListAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
+    filter_fields = ['id', 'title', 'price', 'label', 'category']
+    ordering_fields = ['price', 'title', 'id']
+    search_fields = ['title', 'description']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -15,7 +15,28 @@ urlpatterns = [
     path('minus-cart/<slug>', minusitem, name='minus-cart'),
     path('grand-total/<slug>', grand_total, name='grand-total'),
     path('brand/<name>', BrandView.as_view(), name='brand'),
-]
+    path('contact', contact, name='contact'),
+    ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
